@@ -1,11 +1,20 @@
 <template>
-  Hello! {{ counter }}
+  <div>Index</div>
+  <Link href="/hello">Show Page</Link>
+
+  <!-- Display the message passed from Laravel via props -->
+  <div>
+    The message is {{ message }}
+  </div>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import { Link } from '@inertiajs/vue3'
 
-const counter = ref(0)
-setInterval(() => counter.value++, 1000)
+// Define props with type validation (expects 'message' as a String)
+defineProps({
+  message: String
+})
 
+// Alternatively, use: defineProps(['message']) — no validation
 </script>

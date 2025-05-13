@@ -16,11 +16,11 @@
                 Edit
                 </Link>
 
-                <Link :href="route('listing.destroy', { listing: listing.id })" method="DELETE" as="button"
+                <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
                     class="flex items-center gap-1 px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-800 transition">
-                <TrashIcon class="w-4 h-4" />
-                Delete
-                </Link>
+                    <TrashIcon class="w-4 h-4" />
+                    Delete
+                </button>
             </div>
 
         </Box>
@@ -33,8 +33,11 @@ import ListingAddress from '@/Components/ListingAddress.vue'
 import Box from '@/Components/UI/Box.vue'
 import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
+import { useConfirmDelete } from '@/Composables/UseConfirmDelete'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 defineProps({
     listings: Array,
 })
+
+const { confirmDelete } = useConfirmDelete()
 </script>

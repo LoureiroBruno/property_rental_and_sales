@@ -67,7 +67,7 @@
 
             <div class="col-span-6 flex gap-2">
                 <button type="submit" class="btn-primary">
-                    <PlusIcon class="w-5 h-5" />
+                    <PencilSquareIcon class="w-5 h-5" />
                     Edit
                 </button>
                 <Link :href="route('listing.index')" class="btn-secondary">
@@ -82,7 +82,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
-import { PlusIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 
 const props = defineProps({
     listing: Object,

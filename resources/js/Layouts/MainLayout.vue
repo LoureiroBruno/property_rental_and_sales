@@ -1,9 +1,11 @@
 <template>
-  <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
+  <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full">
     <div class="container mx-auto">
       <nav class="p-4 flex items-center justify-between">
-        <div class="text-lg font-medium">
-          <Link :href="route('listing.index')">Listings</Link>
+        <div class="text-lg font-medium flex items-center gap-1 text-slate-100 hover:underline">
+          <ListBulletIcon class="w-6 h-6" />
+          <Link :href="route('listing.index')" class="text-slate-100 hover:underline hover:text-slate-400 transition">
+          Listings</Link>
         </div>
         <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
@@ -34,6 +36,7 @@
 <script setup>
 import { computed } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
+import { ListBulletIcon } from '@heroicons/vue/24/solid'
 
 // Pegamos os flashs de forma reativa
 const page = usePage()

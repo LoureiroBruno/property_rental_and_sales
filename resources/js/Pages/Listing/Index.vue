@@ -33,7 +33,7 @@ import ListingAddress from '@/Components/ListingAddress.vue'
 import Box from '@/Components/UI/Box.vue'
 import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
-import { useConfirmDelete } from '@/Composables/UseConfirmDelete'
+import { useConfirmDelete } from '@/Composables/useConfirmDelete'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 defineProps({
     listings: Array,

@@ -11,7 +11,7 @@
 
             <div class="mt-4 flex gap-2">
                 <Link :href="route('listing.edit', { listing: listing.id })"
-                    class="flex items-center gap-1 px-4 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-800 transition">
+                    class="flex items-center gap-1 px-4 py-1 text-sm bg-sky-500 text-white rounded hover:bg-sky-800 transition">
                 <PencilSquareIcon class="w-4 h-4" />
                 Edit
                 </Link>

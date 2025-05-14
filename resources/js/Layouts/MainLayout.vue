@@ -17,7 +17,7 @@
           </span>
         </div>
 
-        <div class="flex-1 text-center text-xl font-bold text-indigo-600 dark:text-indigo-300">
+        <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
         </div>
         <div>

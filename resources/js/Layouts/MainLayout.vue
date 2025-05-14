@@ -37,18 +37,46 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import { ListBulletIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 
-// Pegamos os flashs de forma reativa
+// We catch the flashes reactively
 const page = usePage()
-
 const flash = computed(() => page.props.flash)
 
+const successTimeout = ref(null)
+const errorTimeout = ref(null)
+
+/*
+  As soon as flash.success or flash.error receives a value (message), a setTimeout is triggered.
+  After 3 seconds (3000 ms), the message will be automatically closed.
+  If the user clicks before, the clearTimeout ensures that the timeout is cancelled
+  and no more attempts are made to close it.
+*/
+
 const closeMessage = (type) => {
-  flash.value[type] = '' // clear in mensseger (success ou error)
+  flash.value[type] = ''
+  clearTimeout(type === 'success' ? successTimeout.value : errorTimeout.value)
 }
+
+watch(() => flash.value.success, (newValue) => {
+  if (newValue) {
+    clearTimeout(successTimeout.value)
+    successTimeout.value = setTimeout(() => {
+      closeMessage('success')
+    }, 3000)
+  }
+})
+
+watch(() => flash.value.error, (newValue) => {
+  if (newValue) {
+    clearTimeout(errorTimeout.value)
+    errorTimeout.value = setTimeout(() => {
+      closeMessage('error')
+    }, 3000)
+  }
+})
 </script>
 
 <style scoped>

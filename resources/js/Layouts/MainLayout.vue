@@ -23,10 +23,10 @@
 
   <main class="container mx-auto p-4">
 
-    <div class="flex justify-start">
+    <div class="flex justify-center">
       <div class="relative group inline-block">
         <ThemeToggle />
-        <Tooltip text="Turn on | Turn off" />
+        <Tooltip text="choose dark or light viewing mode" />
       </div>
     </div>
 

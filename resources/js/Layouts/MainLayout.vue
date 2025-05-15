@@ -21,17 +21,46 @@
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
         </div>
 
-        <!-- if true it will be displayed -->
-        <div v-if="user" class="flex items-center gap-4">
-          <div class="text-sm text-gray-500">{{ user.name }}</div>
-          <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
-          <div>
-            <Link :href="route('logout')" method="delete" as="button">Logout</Link>
+        <!-- If logged in, show the + New Listing button and the user menu -->
+        <div v-if="user" class="flex items-center gap-12">
+          <Link :href="route('listing.create')" class="btn-primary">
+          + New Listing
+          </Link>
+
+          <div class="relative" id="user-menu">
+            <button @click="toggleDropdown"
+              class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                {{ user.name }}
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Dropdown -->
+            <div v-if="open"
+              class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-50 overflow-hidden">
+
+              <!-- Edit Profile Button -->
+              <button
+                class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                <PencilSquareIcon class="w-4 h-4" />
+                <span>Edit Profile</span>
+              </button>
+
+              <!-- Logout Link -->
+              <Link :href="route('logout')" method="delete" as="button"
+                class="w-full text-center px-4 py-2 text-sm font-medium text-white bg-[indianred] hover:bg-[firebrick] transition">
+              Logout
+              </Link>
+            </div>
           </div>
         </div>
 
         <div v-else>
-          <Link :href="route('login')">Sign-In</Link>
+          <Link :href="route('login')" class="btn-primary">Sign-In</Link>
         </div>
 
       </nav>
@@ -64,6 +93,7 @@ import { Link, usePage } from '@inertiajs/vue3'
 import { Squares2X2Icon, XMarkIcon } from '@heroicons/vue/24/solid'
 import Tooltip from '@/Components/UI/Tooltip.vue'
 import ThemeToggle from '@/Components/UI/ThemeToggle.vue'
+import { PencilSquareIcon } from '@heroicons/vue/24/solid'
 
 // We catch the flashes reactively
 const page = usePage()
@@ -75,6 +105,28 @@ const flash = computed(
 const user = computed(
   () => page.props.user,
 )
+
+import { onMounted, onBeforeUnmount } from 'vue'
+
+const open = ref(false)
+
+const toggleDropdown = () => {
+  open.value = !open.value
+}
+
+const closeDropdown = (event) => {
+  if (!event.target.closest('#user-menu')) {
+    open.value = false
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', closeDropdown)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeDropdown)
+})
 
 const successTimeout = ref(null)
 const errorTimeout = ref(null)

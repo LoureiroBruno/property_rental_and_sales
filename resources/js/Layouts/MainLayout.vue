@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full">
+  <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full mt-2">
     <div class="container mx-auto">
       <nav class="p-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
         <div class="group relative flex items-center gap-2 text-lg font-medium text-slate-100">
@@ -9,15 +9,9 @@
             class="hover:underline transition text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400">
           Listings
           </Link>
-
-          <!-- Tooltip -->
-          <span
-            class="absolute z-10 top-full mt-2 left-1/2 -translate-x-1/2 whitespace-normal min-w-[10rem] text-center opacity-0 group-hover:opacity-100 bg-gray-700 text-white text-xs rounded px-3 py-1 shadow-lg transition">
-            See all boxes
-          </span>
         </div>
 
-        <div class="flex-1 text-center text-xl font-bold text-indigo-600 dark:text-indigo-300">
+        <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
         </div>
         <div>
@@ -29,7 +23,12 @@
 
   <main class="container mx-auto p-4">
 
-    <ThemeToggle />
+    <div class="flex justify-center">
+      <div class="relative group inline-block">
+        <ThemeToggle />
+        <Tooltip text="choose dark or light viewing mode" />
+      </div>
+    </div>
 
     <div v-if="flash.success"
       class="mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-2 relative">
@@ -53,6 +52,7 @@
 import { computed, ref, watch } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import { Squares2X2Icon, XMarkIcon } from '@heroicons/vue/24/solid'
+import Tooltip from '@/Components/UI/Tooltip.vue'
 import ThemeToggle from '@/Components/UI/ThemeToggle.vue'
 
 // We catch the flashes reactively

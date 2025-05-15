@@ -1,15 +1,20 @@
 <template>
     <div class="flex justify-end mt-2 mb-4 pr-4">
         <button @click="toggleTheme"
-            class="relative w-14 h-8 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors duration-300 focus:outline-none">
+            class="relative w-16 h-10 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors duration-300 focus:outline-none">
             <span
-                class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300"
+                class="absolute top-1 left-1 w-8 h-8 bg-white rounded-full shadow-md transform transition-transform duration-300"
                 :class="{ 'translate-x-6': isDark }"></span>
-            <span class="absolute left-2 top-2 text-yellow-500 text-xs" v-if="!isDark">🌞</span>
-            <span class="absolute right-2 top-2 text-gray-200 text-xs" v-else>🌙</span>
+
+            <span class="absolute inset-y-0 left-1 flex items-center justify-center w-1/2 text-yellow-600 text-2xl"
+                v-if="!isDark">🌞</span>
+
+            <span class="absolute inset-y-0 right-0 flex items-center justify-center w-1/2 text-gray-200 text-2xl"
+                v-else>🌙</span>
         </button>
     </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'

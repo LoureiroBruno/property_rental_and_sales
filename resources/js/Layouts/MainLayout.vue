@@ -2,6 +2,7 @@
   <header class="mb-[50px] border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full mt-2">
     <div class="container mx-auto">
       <nav class="p-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
+
         <div class="group relative flex items-center gap-2 text-lg font-medium text-slate-100">
           <Squares2X2Icon
             class="w-6 h-6 text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400 transition" />
@@ -19,9 +20,18 @@
         <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
         </div>
-        <div>
+
+        <!-- if true it will be displayed -->
+        <div v-if="user" class="flex items-center gap-4">
+          <div class="text-sm text-gray-500">{{ user.name }}</div>
           <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
+          <div>Logout</div>
         </div>
+
+        <div v-else>
+          <Link :href="route('login')">Sign-In</Link>
+        </div>
+
       </nav>
     </div>
   </header>
@@ -55,7 +65,14 @@ import ThemeToggle from '@/Components/UI/ThemeToggle.vue'
 
 // We catch the flashes reactively
 const page = usePage()
-const flash = computed(() => page.props.flash)
+const flash = computed(
+  () => page.props.flash
+)
+
+// authenticated user information
+const user = computed(
+  () => page.props.user,
+)
 
 const successTimeout = ref(null)
 const errorTimeout = ref(null)

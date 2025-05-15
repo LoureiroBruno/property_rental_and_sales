@@ -1,5 +1,5 @@
 <template>
-  <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full mt-2">
+  <header class="mb-[50px] border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full mt-2">
     <div class="container mx-auto">
       <nav class="p-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
         <div class="group relative flex items-center gap-2 text-lg font-medium text-slate-100">
@@ -9,6 +9,11 @@
             class="hover:underline transition text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400">
           Listings
           </Link>
+        </div>
+
+        <div class="relative group">
+          <ThemeToggle />
+          <Tooltip text="Choose dark or light viewing mode" position="bottom" />
         </div>
 
         <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
@@ -21,14 +26,7 @@
     </div>
   </header>
 
-  <main class="container mx-auto p-4">
-
-    <div class="flex justify-center">
-      <div class="relative group inline-block">
-        <ThemeToggle />
-        <Tooltip text="choose dark or light viewing mode" />
-      </div>
-    </div>
+  <main class="container mx-auto p-4 w-full">
 
     <div v-if="flash.success"
       class="mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-2 relative">

@@ -16,17 +16,19 @@
             </div>
         </div>
         <div class="mt-4 flex gap-2">
+
             <Link :href="route('listing.edit', { listing: listing.id })"
-                class="flex items-center gap-1 px-4 py-1 text-sm bg-sky-500 text-white rounded hover:bg-sky-800 transition">
-            <PencilSquareIcon class="w-4 h-4" />
+                class="btn-sky flex items-center gap-1 px-4 py-1 text-sm  rounded">
+            <PencilSquareIcon class="w-4 h-6" />
             Edit
             </Link>
 
             <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
-                class="flex items-center gap-1 px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-800 transition">
-                <TrashIcon class="w-4 h-4" />
+                class="btn-indianred flex items-center gap-1 px-4 py-1 text-sm  rounded">
+                <TrashIcon class="w-4 h-6" />
                 Delete
             </button>
+
         </div>
     </Box>
 </template>

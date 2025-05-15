@@ -12,11 +12,23 @@
   }
 
   .btn-primary {
-    @apply bg-teal-500 hover:bg-teal-800 text-white font-medium p-2 rounded-md flex items-center gap-1;
+    @apply bg-teal-500 hover:bg-teal-800 text-white font-medium p-2 rounded-md flex items-center justify-center gap-1;
   }
 
   .btn-secondary {
     @apply bg-gray-600 hover:bg-gray-500 text-white font-medium p-2 rounded-md flex items-center gap-1;
+  }
+
+  .btn-indigo {
+    @apply bg-indigo-500 hover:bg-indigo-800 text-white font-medium p-2 rounded-md flex items-center justify-center gap-1;
+  }
+
+  .btn-indianred {
+    @apply bg-[indianred] hover:bg-[firebrick] text-white font-medium p-2 rounded-md text-center;
+  }
+
+  .btn-sky {
+    @apply bg-sky-500 hover:bg-sky-800 text-white font-medium p-2 rounded-md flex items-center justify-center gap-1;
   }
 
   .input-error {

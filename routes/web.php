@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UserAccountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,3 +19,6 @@ Route::post('login', [App\Http\Controllers\AuthController::class, 'store'])
     ->name('login.store');
 Route::delete('logout', [App\Http\Controllers\AuthController::class, 'destroy'])
     ->name('logout');
+
+Route::resource('user-account', UserAccountController::class)
+    ->only(['create']);

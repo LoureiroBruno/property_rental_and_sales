@@ -25,6 +25,9 @@
           </div>
         </div>
 
+        <div v-else>
+          <Link :href="route('user-account.create')" class="btn-indigo">Register</Link>
+        </div>
 
         <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
@@ -34,8 +37,9 @@
         <div v-if="user" class="flex items-center gap-12">
 
           <div class="relative" id="user-menu">
-            <button @click="toggleDropdown"
-              class="flex items-center gap-2 px-4 py-2 bg-none dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <button @click="toggleDropdown" class="flex items-center gap-2 px-4 py-2  bg-stone-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
+              rounded-md shadow-lg z-50 overflow-hidden">
+              <ListBulletIcon class="w-6 h-6" />
               <span class="text-sm font-medium text-gray-700 dark:text-gray-200">
                 {{ user.name }}
               </span>
@@ -48,12 +52,16 @@
             <!-- Dropdown -->
             <div v-if="open" class="absolute right-0 mt-2 w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
               rounded-md shadow-lg z-50 overflow-hidden">
+
               <!-- Dark/Light Mode Toggle Button -->
               <button @click="toggleTheme"
                 class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
                 <component :is="isDark ? SunIcon : MoonIcon" :class="isDark ? 'w-8 h-7' : 'w-8 h-6'" />
                 <span>{{ isDark ? 'Clear mode' : 'Dark mode' }}</span>
               </button>
+
+              <!-- Divider -->
+              <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
 
               <!-- Edit Profile Button -->
               <button
@@ -62,12 +70,17 @@
                 <span>Edit Profile</span>
               </button>
 
+              <!-- Divider -->
+              <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+
               <!-- Logout Button -->
               <Link :href="route('logout')" method="delete" as="button"
-                class="w-full text-center px-4 py-2 text-sm font-medium text-white bg-[indianred] hover:bg-[firebrick] transition">
-              Logout
+                class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-white bg-[indianred] hover:bg-[firebrick] transition">
+              <ArrowLeftOnRectangleIcon class="w-8 h-6" />
+              <span>Logout</span>
               </Link>
             </div>
+
           </div>
         </div>
 
@@ -100,13 +113,23 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+// Vue core
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+
+// Inertia
 import { Link, usePage } from '@inertiajs/vue3'
-import { Squares2X2Icon, XMarkIcon } from '@heroicons/vue/24/solid'
-import { PencilSquareIcon } from '@heroicons/vue/24/solid'
-import { SunIcon, MoonIcon } from '@heroicons/vue/24/solid'
-import { onMounted, onBeforeUnmount } from 'vue'
-import { PlusIcon } from '@heroicons/vue/24/solid'
+
+// Heroicons - Solid
+import {
+  Squares2X2Icon,
+  XMarkIcon,
+  PencilSquareIcon,
+  SunIcon,
+  MoonIcon,
+  PlusIcon,
+  ListBulletIcon,
+  ArrowLeftOnRectangleIcon
+} from '@heroicons/vue/24/solid'
 
 /* We catch the flashes reactively */
 const page = usePage()

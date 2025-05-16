@@ -3,18 +3,15 @@
     <div class="container mx-auto">
       <nav class="p-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
 
-        <div class="group relative flex items-center gap-2 text-lg font-medium text-slate-100">
-          <Squares2X2Icon
-            class="w-6 h-6 text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400 transition" />
-          <Link :href="route('listing.index')"
-            class="hover:underline transition text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400">
-          Listings
-          </Link>
-        </div>
-
-        <div class="relative group">
-          <ThemeToggle />
-          <Tooltip text="Choose dark or light viewing mode" position="bottom" />
+        <div v-if="user">
+          <div class="group relative flex items-center gap-2 text-lg font-medium text-slate-100">
+            <Squares2X2Icon
+              class="w-6 h-6 text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400 transition" />
+            <Link :href="route('listing.index')"
+              class="hover:underline transition text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400">
+            Listings
+            </Link>
+          </div>
         </div>
 
         <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
@@ -40,17 +37,23 @@
             </button>
 
             <!-- Dropdown -->
-            <div v-if="open"
-              class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-50 overflow-hidden">
+            <div v-if="open" class="absolute right-0 mt-2 w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
+              rounded-md shadow-lg z-50 overflow-hidden">
+              <!-- Dark/Light Mode Toggle Button -->
+              <button @click="toggleTheme"
+                class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                <component :is="isDark ? SunIcon : MoonIcon" :class="isDark ? 'w-8 h-7' : 'w-8 h-6'" />
+                <span>{{ isDark ? 'Clear mode' : 'Dark mode' }}</span>
+              </button>
 
               <!-- Edit Profile Button -->
               <button
                 class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-                <PencilSquareIcon class="w-4 h-4" />
+                <PencilSquareIcon class="w-8 h-6" />
                 <span>Edit Profile</span>
               </button>
 
-              <!-- Logout Link -->
+              <!-- Logout Button -->
               <Link :href="route('logout')" method="delete" as="button"
                 class="w-full text-center px-4 py-2 text-sm font-medium text-white bg-[indianred] hover:bg-[firebrick] transition">
               Logout
@@ -91,23 +94,33 @@
 import { computed, ref, watch } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import { Squares2X2Icon, XMarkIcon } from '@heroicons/vue/24/solid'
-import Tooltip from '@/Components/UI/Tooltip.vue'
-import ThemeToggle from '@/Components/UI/ThemeToggle.vue'
 import { PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { SunIcon, MoonIcon } from '@heroicons/vue/24/solid'
+import { onMounted, onBeforeUnmount } from 'vue'
 
-// We catch the flashes reactively
+/* We catch the flashes reactively */
 const page = usePage()
 const flash = computed(
   () => page.props.flash
 )
 
-// authenticated user information
+/* authenticated user information */
 const user = computed(
   () => page.props.user,
 )
 
-import { onMounted, onBeforeUnmount } from 'vue'
+/* dark or light mode */
+const isDark = ref(false)
+onMounted(() => {
+  isDark.value = document.documentElement.classList.contains('dark')
+})
 
+const toggleTheme = () => {
+  isDark.value = !isDark.value
+  document.documentElement.classList.toggle('dark', isDark.value)
+}
+
+/* dropdown */
 const open = ref(false)
 
 const toggleDropdown = () => {

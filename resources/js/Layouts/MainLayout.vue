@@ -4,15 +4,27 @@
       <nav class="p-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
 
         <div v-if="user">
-          <div class="group relative flex items-center gap-2 text-lg font-medium text-slate-100">
-            <Squares2X2Icon
-              class="w-6 h-6 text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400 transition" />
+          <div class="relative flex items-center gap-2 text-lg font-medium text-slate-100">
+
+            <!-- Ícone reagindo ao hover do botão "Listings" -->
             <Link :href="route('listing.index')"
-              class="hover:underline transition text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400">
+              class="group flex items-center gap-2 px-4 py-2 transition flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300 hover:underline">
+            <Squares2X2Icon
+              class="w-6 h-6 text-slate-800 dark:text-slate-200 group-hover:text-slate-600 dark:group-hover:text-slate-400 transition" />
             Listings
+            </Link>
+
+            <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300"> | </div>
+
+            <Link :href="route('listing.create')"
+              class="group flex items-center gap-2 text-xl font-bold text-gray-600 dark:text-gray-300 transition border border-gray-400 dark:border-gray-600 rounded-md px-4 py-2 hover:shadow-md dark:hover:shadow-lg">
+            <PlusIcon
+              class="w-6 h-6 text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-white transition" />
+            New Listing
             </Link>
           </div>
         </div>
+
 
         <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
@@ -20,13 +32,10 @@
 
         <!-- If logged in, show the + New Listing button and the user menu -->
         <div v-if="user" class="flex items-center gap-12">
-          <Link :href="route('listing.create')" class="btn-primary">
-          + New Listing
-          </Link>
 
           <div class="relative" id="user-menu">
             <button @click="toggleDropdown"
-              class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+              class="flex items-center gap-2 px-4 py-2 bg-none dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
               <span class="text-sm font-medium text-gray-700 dark:text-gray-200">
                 {{ user.name }}
               </span>
@@ -97,6 +106,7 @@ import { Squares2X2Icon, XMarkIcon } from '@heroicons/vue/24/solid'
 import { PencilSquareIcon } from '@heroicons/vue/24/solid'
 import { SunIcon, MoonIcon } from '@heroicons/vue/24/solid'
 import { onMounted, onBeforeUnmount } from 'vue'
+import { PlusIcon } from '@heroicons/vue/24/solid'
 
 /* We catch the flashes reactively */
 const page = usePage()

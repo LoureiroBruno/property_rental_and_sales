@@ -8,7 +8,7 @@
 
             <!-- Ícone reagindo ao hover do botão "Listings" -->
             <Link :href="route('listing.index')"
-              class="group flex items-center gap-2 px-4 py-2 transition flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300 hover:underline">
+              class="group flex items-center gap-2 text-xl font-bold text-gray-600 dark:text-gray-300 hover:underline transition border border-gray-400 dark:border-gray-600 rounded-md px-4 py-2 hover:shadow-md dark:hover:shadow-lg">
             <Squares2X2Icon
               class="w-6 h-6 text-slate-800 dark:text-slate-200 group-hover:text-slate-600 dark:group-hover:text-slate-400 transition" />
             Listings
@@ -17,7 +17,7 @@
             <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300"> | </div>
 
             <Link :href="route('listing.create')"
-              class="group flex items-center gap-2 text-xl font-bold text-gray-600 dark:text-gray-300 transition border border-gray-400 dark:border-gray-600 rounded-md px-4 py-2 hover:shadow-md dark:hover:shadow-lg">
+              class="group flex items-center gap-2 text-xl font-bold text-gray-600 dark:text-gray-300 hover:underline transition border border-gray-400 dark:border-gray-600 rounded-md px-4 py-2 hover:shadow-md dark:hover:shadow-lg">
             <PlusIcon
               class="w-6 h-6 text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-white transition" />
             New Listing

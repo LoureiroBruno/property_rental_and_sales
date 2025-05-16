@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -44,5 +45,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Normalize the name: capitalize the first letter of each word.
+     * Example: 'francisco jossé ferreira da costa' => 'Francisco Jossé Ferreira Da Costa'
+     */
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => ucwords(strtolower($value))
+        );
+    }
+
+    /**
+     * Automatically normalize email to lowercase before saving to database.
+     * Ensures consistency and avoids duplicate emails with different cases.
+     */
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => strtolower($value)
+        );
     }
 }

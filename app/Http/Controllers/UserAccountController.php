@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserAccountRequest;
 use App\Models\User;
 use Auth;
-use Hash;
 use Illuminate\Http\Request;
 
 class UserAccountController extends Controller

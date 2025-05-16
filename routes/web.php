@@ -8,9 +8,9 @@ Route::get('/', function () {
 });
 
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/hello', [IndexController::class, 'show']);
+Route::get('/hello', [IndexController::class, 'show'])->middleware('auth');
 
-Route::resource('listing', App\Http\Controllers\ListingController::class);
+Route::resource('listing', App\Http\Controllers\ListingController::class)->middleware('auth');
 
 Route::get('login', [App\Http\Controllers\AuthController::class, 'create'])
     ->name('login');

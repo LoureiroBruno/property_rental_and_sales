@@ -1,9 +1,9 @@
 <template>
-    <form @submit.prevent="create">
+    <form @submit.prevent="create" class="w-full mx-auto p-6 bg-white dark:bg-gray-900 rounded-md shadow-md">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-2">
                 <label class="label">Beds</label>
-                <input v-model.number="form.beds" type="text" class="input" />
+                <input id="beds" v-model.number="form.beds" type="number" class="input" placeholder="Ex: 3" />
                 <div v-if="form.errors.beds" class="input-error">
                     {{ form.errors.beds }}
                 </div>
@@ -11,14 +11,14 @@
 
             <div class="col-span-2">
                 <label class="label">Baths</label>
-                <input v-model.number="form.baths" type="text" class="input" />
+                <input id="baths" v-model.number="form.baths" type="number" class="input" placeholder="Ex: 2" />
                 <div v-if="form.errors.baths" class="input-error">
                     {{ form.errors.baths }}
                 </div>
             </div>
             <div class="col-span-2">
                 <label class="label">Area</label>
-                <input v-model.number="form.area" type="text" class="input" />
+                <input id="area" v-model.number="form.area" type="number" class="input" placeholder="Ex: 120" />
                 <div v-if="form.errors.area" class="input-error">
                     {{ form.errors.area }}
                 </div>
@@ -26,7 +26,7 @@
 
             <div class="col-span-4">
                 <label class="label">City</label>
-                <input v-model="form.city" type="text" class="input" />
+                <input id="city" v-model="form.city" type="text" class="input" placeholder="Ex: São Paulo" />
                 <div v-if="form.errors.city" class="input-error">
                     {{ form.errors.city }}
                 </div>
@@ -34,7 +34,7 @@
 
             <div class="col-span-2">
                 <label class="label">Post Code</label>
-                <input v-model="form.code" type="text" class="input" />
+                <input id="code" v-model="form.code" type="text" class="input" placeholder="Ex: 12345-678" />
                 <div v-if="form.errors.code" class="input-error">
                     {{ form.errors.code }}
                 </div>
@@ -42,7 +42,7 @@
 
             <div class="col-span-4">
                 <label class="label">Street</label>
-                <input v-model="form.street" type="text" class="input" />
+                <input id="street" v-model="form.street" type="text" class="input" placeholder="Ex: Av. Brasil" />
                 <div v-if="form.errors.street" class="input-error">
                     {{ form.errors.street }}
                 </div>
@@ -50,7 +50,8 @@
 
             <div class="col-span-2">
                 <label class="label">Street Nr</label>
-                <input v-model.number="form.street_nr" type="text" class="input" />
+                <input id="street_nr" v-model.number="form.street_nr" type="number" class="input"
+                    placeholder="Ex: 123" />
                 <div v-if="form.errors.street_nr" class="input-error">
                     {{ form.errors.street_nr }}
                 </div>
@@ -58,7 +59,7 @@
 
             <div class="col-span-6">
                 <label class="label">Price</label>
-                <input v-model.number="form.price" type="text" class="input" />
+                <input id="price" v-model.number="form.price" type="number" class="input" placeholder="Ex: 250000" />
                 <div v-if="form.errors.price" class="input-error">
                     {{ form.errors.price }}
                 </div>
@@ -87,12 +88,13 @@ const form = useForm({
     beds: 0,
     baths: 0,
     area: 0,
-    city: null,
-    street: null,
-    code: null,
+    city: '',
+    street: '',
+    code: '',
     street_nr: null,
     price: 0,
 })
+
 const create = () => form.post(route('listing.store'))
 </script>
 
@@ -102,6 +104,30 @@ label {
 }
 
 div {
-    padding: 2px
+    padding: 2px;
+}
+
+.input-error {
+    color: #dc2626;
+    /* Tailwind red-600 */
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.input {
+    border: 1px solid #d1d5db;
+    /* Tailwind gray-300 */
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    @apply bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center justify-center;
+}
+
+.btn-secondary {
+    @apply bg-gray-300 text-gray-700 px-4 py-2 rounded flex items-center gap-2 hover:bg-gray-400;
 }
 </style>

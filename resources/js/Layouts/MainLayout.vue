@@ -1,40 +1,29 @@
 <template>
-  <header class="mb-[50px] border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full mt-2">
+  <header
+    class="sticky top-0 z-50 mb-12 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm dark:shadow-gray-800 w-full mt-2">
     <div class="container mx-auto">
       <nav class="p-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
-
         <div v-if="user">
           <div class="relative flex items-center gap-2 text-lg font-medium text-slate-100">
-
-            <!-- Ícone reagindo ao hover do botão "Listings" -->
             <Link :href="route('listing.index')"
-              class="group flex items-center gap-2 text-xl font-bold text-gray-600 dark:text-gray-300 hover:underline transition border border-gray-400 dark:border-gray-600 rounded-md px-4 py-2 hover:shadow-md dark:hover:shadow-lg">
-            <Squares2X2Icon
-              class="w-6 h-6 text-slate-800 dark:text-slate-200 group-hover:text-slate-600 dark:group-hover:text-slate-400 transition" />
+              class="flex items-center gap-2 font-bold text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+            <Squares2X2Icon class="w-6 h-6" />
             Listings
             </Link>
-
-            <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300"> | </div>
-
             <Link :href="route('listing.create')"
-              class="group flex items-center gap-2 text-xl font-bold text-gray-600 dark:text-gray-300 hover:underline transition border border-gray-400 dark:border-gray-600 rounded-md px-4 py-2 hover:shadow-md dark:hover:shadow-lg">
-            <PlusIcon
-              class="w-6 h-6 text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-white transition" />
+              class="flex items-center gap-2 font-bold text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+            <PlusIcon class="w-6 h-6" />
             New Listing
             </Link>
           </div>
         </div>
-
-        <div v-else>
-          <Link :href="route('user-account.create')" class="btn-indigo">Register</Link>
-        </div>
-
-        <div class="flex-1 text-center text-xl font-bold text-gray-600 dark:text-gray-300">
+        <!-- Centro -->
+        <div class="flex-1 text-center font-bold text-xl text-gray-800 dark:text-gray-200">
           <Link :href="route('listing.index')">Property Rental and Sales</Link>
         </div>
 
-        <!-- If logged in, show the + New Listing button and the user menu -->
-        <div v-if="user" class="flex items-center gap-12">
+        <!-- Direita -->
+        <div v-if="user" class="relative flex items-center gap-6">
 
           <div class="relative" id="user-menu">
             <button @click="toggleDropdown" class="flex items-center gap-2 px-4 py-2  bg-stone-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
@@ -48,7 +37,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-
             <!-- Dropdown -->
             <div v-if="open" class="absolute right-0 mt-2 w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
               rounded-md shadow-lg z-50 overflow-hidden">
@@ -72,7 +60,6 @@
 
               <!-- Divider -->
               <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
-
               <!-- Logout Button -->
               <Link :href="route('logout')" method="delete" as="button"
                 class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-white bg-[indianred] hover:bg-[firebrick] transition">
@@ -82,12 +69,8 @@
             </div>
 
           </div>
-        </div>
 
-        <div v-else>
-          <Link :href="route('login')" class="btn-primary">Sign-In</Link>
         </div>
-
       </nav>
     </div>
   </header>

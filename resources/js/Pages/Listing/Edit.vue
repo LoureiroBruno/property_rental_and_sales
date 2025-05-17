@@ -1,9 +1,9 @@
 <template>
-    <form @submit.prevent="update">
+    <form @submit.prevent="update" class="w-full mx-auto p-6 bg-white dark:bg-gray-900 rounded-md shadow-md">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-2">
                 <label class="label">Beds</label>
-                <input v-model.number="form.beds" type="text" class="input" />
+                <input id="beds" v-model.number="form.beds" type="number" class="input" placeholder="Ex: 3" />
                 <div v-if="form.errors.beds" class="input-error">
                     {{ form.errors.beds }}
                 </div>
@@ -11,7 +11,7 @@
 
             <div class="col-span-2">
                 <label class="label">Baths</label>
-                <input v-model.number="form.baths" type="text" class="input" />
+                <input id="baths" v-model.number="form.baths" type="number" class="input" placeholder="Ex: 2" />
                 <div v-if="form.errors.baths" class="input-error">
                     {{ form.errors.baths }}
                 </div>
@@ -19,7 +19,7 @@
 
             <div class="col-span-2">
                 <label class="label">Area</label>
-                <input v-model.number="form.area" type="text" class="input" />
+                <input id="area" v-model.number="form.area" type="number" class="input" placeholder="Ex: 120" />
                 <div v-if="form.errors.area" class="input-error">
                     {{ form.errors.area }}
                 </div>
@@ -27,7 +27,7 @@
 
             <div class="col-span-4">
                 <label class="label">City</label>
-                <input v-model="form.city" type="text" class="input" />
+                <input id="city" v-model="form.city" type="text" class="input" placeholder="Ex: São Paulo" />
                 <div v-if="form.errors.city" class="input-error">
                     {{ form.errors.city }}
                 </div>
@@ -35,7 +35,7 @@
 
             <div class="col-span-2">
                 <label class="label">Post Code</label>
-                <input v-model="form.code" type="text" class="input" />
+                <input id="code" v-model="form.code" type="text" class="input" placeholder="Ex: 12345-678" />
                 <div v-if="form.errors.code" class="input-error">
                     {{ form.errors.code }}
                 </div>
@@ -43,7 +43,7 @@
 
             <div class="col-span-4">
                 <label class="label">Street</label>
-                <input v-model="form.street" type="text" class="input" />
+                <input id="street" v-model="form.street" type="text" class="input" placeholder="Ex: Av. Brasil" />
                 <div v-if="form.errors.street" class="input-error">
                     {{ form.errors.street }}
                 </div>
@@ -51,7 +51,8 @@
 
             <div class="col-span-2">
                 <label class="label">Street Nr</label>
-                <input v-model.number="form.street_nr" type="text" class="input" />
+                <input id="street_nr" v-model.number="form.street_nr" type="number" class="input"
+                    placeholder="Ex: 123" />
                 <div v-if="form.errors.street_nr" class="input-error">
                     {{ form.errors.street_nr }}
                 </div>
@@ -59,7 +60,7 @@
 
             <div class="col-span-6">
                 <label class="label">Price</label>
-                <input v-model.number="form.price" type="text" class="input" />
+                <input id="price" v-model.number="form.price" type="number" class="input" placeholder="Ex: 250000" />
                 <div v-if="form.errors.price" class="input-error">
                     {{ form.errors.price }}
                 </div>
@@ -105,7 +106,19 @@ label {
     margin-right: 2em;
 }
 
-div {
-    padding: 2px
+.input {
+    @apply w-full rounded border border-gray-300 dark:border-gray-700 p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+}
+
+.input-error {
+    @apply text-sm text-red-600 dark:text-red-400 mt-1;
+}
+
+.btn-primary {
+    @apply bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition flex items-center justify-center;
+}
+
+.btn-secondary {
+    @apply bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-600 transition flex items-center justify-center;
 }
 </style>

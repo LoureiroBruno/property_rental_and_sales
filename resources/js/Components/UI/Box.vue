@@ -1,9 +1,23 @@
 <template>
-    <div class="border border-gray-200 dark:border-gray-800 rounded-md p-4 shadow-sm dark:text-gray-300">
-        <div class="text-gray-500 font-medium mb-1">
-            <slot name="header" />
+    <div
+        class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md p-6 space-y-4 transition-colors">
+        <div v-if="$slots.header" class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                <slot name="header" />
+            </h2>
+            <div v-if="$slots.actions" class="flex items-center space-x-2">
+                <slot name="actions" />
+            </div>
         </div>
-        <slot /> <!-- content -->
-    </div>
 
+        <div class="text-gray-700 dark:text-gray-300 text-sm">
+            <slot />
+        </div>
+    </div>
 </template>
+
+<style scoped>
+div {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+</style>

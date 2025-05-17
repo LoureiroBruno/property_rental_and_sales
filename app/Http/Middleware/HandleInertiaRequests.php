@@ -44,6 +44,11 @@ class HandleInertiaRequests extends Middleware
                 'warning' => fn() => $request->session()->get('warning'),
                 'info'    => fn() => $request->session()->get('info'),
             ],
+            'user' => fn() => $request->user() ? [
+                'id'    => $request->user()->id,
+                'name'  => $request->user()->name,
+                'email' => $request->user()->email,
+            ] : null,
         ]);
     }
 }

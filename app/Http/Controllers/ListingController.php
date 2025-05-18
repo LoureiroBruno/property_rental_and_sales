@@ -34,7 +34,7 @@ class ListingController extends Controller
             'filters' => $filters,
             'listings' => Listing::mostRecent()
                 ->filter($filters)
-                ->paginate(9)
+                ->paginate(15)
                 ->through(function ($listing) use ($user) {
                     return array_merge(
                         $listing->toArray(),

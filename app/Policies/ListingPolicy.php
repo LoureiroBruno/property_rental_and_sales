@@ -53,6 +53,8 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing)
     {
+
+        // access permission only for authenticated users and permission for update, delete and other actions by by_user_id
         return $user->id === $listing->by_user_id;
     }
 
@@ -65,6 +67,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing)
     {
+        // access permission only for authenticated users and permission for update, delete and other actions by by_user_id
         return $user->id === $listing->by_user_id;
     }
 
@@ -77,6 +80,7 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing)
     {
+        // access permission only for authenticated users and permission for update, delete and other actions by by_user_id
         return $user->id === $listing->by_user_id;
     }
 
@@ -89,6 +93,7 @@ class ListingPolicy
      */
     public function forceDelete(User $user, Listing $listing)
     {
+        //access permission only for authenticated users and permission for update, delete and other actions by by_user_id
         return $user->id === $listing->by_user_id;
     }
 }

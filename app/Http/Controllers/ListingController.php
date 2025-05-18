@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListingRequest;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,16 +28,25 @@ class ListingController extends Controller
             'areaTo'
         ]);
 
-        return inertia(
-            'Listing/Index',
-            [
-                'filters' => $filters,
-                'listings' => Listing::mostRecent()
-                    ->filter($filters)
-                    ->paginate(9)
-                    ->withQueryString()
-            ]
-        );
+        $user = Auth::user();
+
+        return inertia('Listing/Index', [
+            'filters' => $filters,
+            'listings' => Listing::mostRecent()
+                ->filter($filters)
+                ->paginate(9)
+                ->through(function ($listing) use ($user) {
+                    return array_merge(
+                        $listing->toArray(),
+                        [
+                            'can' => [
+                                'edit' => $user?->can('update', $listing),
+                                'delete' => $user?->can('delete', $listing),
+                            ]
+                        ]
+                    );
+                }),
+        ]);
     }
 
     /**
@@ -51,7 +61,7 @@ class ListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ListingRequest $request)
     {
         $request->user()->listings()->create($request->validated());
 
@@ -87,20 +97,12 @@ class ListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Listing $listing)
+    public function update(ListingRequest $request, Listing $listing)
     {
-        $listing->update(
-            $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:15|max:1500',
-                'city' => 'required',
-                'code' => 'required',
-                'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
-            ])
-        );
+        $this->authorize('update', $listing);
+
+        $listing->update($request->validated());
+
 
         return redirect()->route('listing.index')
             ->with('success', 'Listing was changed!');
@@ -111,6 +113,8 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing)
     {
+        $this->authorize('delete', $listing);
+
         $listing->delete();
 
         return redirect()->back()

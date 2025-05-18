@@ -28,7 +28,7 @@ class ListingRequest extends FormRequest
             'city' => 'required|string',
             'code' => 'required|string',
             'street' => 'required|string',
-            'street_nr' => 'required|string|min:1|max:1000',
+            'street_nr' => 'required|integer|min:1|max:1000',
             'price' => 'required|integer|min:1|max:20000000',
         ];
     }

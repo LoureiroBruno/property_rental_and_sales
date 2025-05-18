@@ -17,17 +17,21 @@
         </div>
         <div class="mt-4 flex gap-2">
 
-            <Link :href="route('listing.edit', { listing: listing.id })"
-                class="btn-sky flex items-center gap-1 px-4 py-1 text-sm  rounded">
-            <PencilSquareIcon class="w-4 h-6" />
-            Edit
-            </Link>
+            <div v-if="listing.can.edit">
+                <Link :href="route('listing.edit', { listing: listing.id })"
+                    class="btn-sky flex items-center gap-1 px-4 py-1 text-sm  rounded">
+                <PencilSquareIcon class="w-4 h-6" />
+                Edit
+                </Link>
+            </div>
 
-            <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
-                class="btn-indianred flex items-center gap-1 px-4 py-1 text-sm  rounded">
-                <TrashIcon class="w-4 h-6" />
-                Delete
-            </button>
+            <div v-if="listing.can.delete">
+                <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
+                    class="btn-indianred flex items-center gap-1 px-4 py-1 text-sm  rounded">
+                    <TrashIcon class="w-4 h-6" />
+                    Delete
+                </button>
+            </div>
 
         </div>
     </Box>

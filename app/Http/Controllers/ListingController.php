@@ -15,7 +15,9 @@ class ListingController extends Controller
         return inertia(
             'Listing/Index',
             [
-                'listings' => Listing::all()
+                // 'listings' => Listing::all()
+                'listings' => Listing::orderByDesc('created_at')
+                    ->paginate(9)
             ]
         );
     }
@@ -34,7 +36,8 @@ class ListingController extends Controller
     public function store(Request $request)
     {
         // Listing::create($request->all());
-        Listing::create(
+        // Listing::create(
+        $request->user()->listings()->create(
             $request->validate([
                 'beds' => 'required|integer|min:0|max:20',
                 'baths' => 'required|integer|min:0|max:20',

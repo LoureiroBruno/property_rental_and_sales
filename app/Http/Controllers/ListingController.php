@@ -10,14 +10,23 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return inertia(
             'Listing/Index',
             [
+                'filters' => $request->only([
+                    'priceFrom',
+                    'priceTo',
+                    'beds',
+                    'baths',
+                    'areaFrom',
+                    'areaTo'
+                ]),
                 // 'listings' => Listing::all()
                 'listings' => Listing::orderByDesc('created_at')
                     ->paginate(9)
+                    ->withQueryString()
             ]
         );
     }

@@ -26,13 +26,13 @@
                     </Link>
                 </div>
 
-                <div v-if="listing.can.delete">
+                <!-- <div v-if="listing.can.delete">
                     <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
                         class="btn-indianred flex items-center justify-center gap-1 px-4 py-1 text-sm rounded w-full md:w-auto">
                         <TrashIcon class="w-4 h-4" />
                         Delete
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </Box>

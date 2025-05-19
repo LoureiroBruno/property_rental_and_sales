@@ -14,7 +14,15 @@ Route::get('/', function () {
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/hello', [IndexController::class, 'show'])->middleware('auth');
 
+// Route::resource('listing', ListingController::class)
+//     ->only(['index', 'show']); o que vai valer
 Route::resource('listing', App\Http\Controllers\ListingController::class)->middleware('auth');
+// Route::resource('listing', App\Http\Controllers\ListingController::class)
+//     ->only(['create, store, edit, update'])
+//     ->middleware('auth');
+// Route::resource('listing', App\Http\Controllers\ListingController::class)
+//     ->only(['create, store, edit, update, destroy']);
+
 
 Route::get('login', [App\Http\Controllers\AuthController::class, 'create'])
     ->name('login');

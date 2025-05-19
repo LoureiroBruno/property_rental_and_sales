@@ -111,13 +111,13 @@ class ListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Listing $listing)
-    {
-        $this->authorize('delete', $listing);
+    // public function destroy(Listing $listing)
+    // {
+    //     $this->authorize('delete', $listing);
 
-        $listing->delete();
+    //     $listing->delete();
 
-        return redirect()->back()
-            ->with('success', 'Listing was deleted!');
-    }
+    //     return redirect()->back()
+    //         ->with('success', 'Listing was deleted!');
+    // }
 }

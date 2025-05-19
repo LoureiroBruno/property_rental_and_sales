@@ -43,7 +43,7 @@
 
               <!-- Dark/Light Mode Toggle Button -->
               <button @click="toggleTheme"
-                class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                class="w-full flex items-center justify-start gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
                 <component :is="isDark ? SunIcon : MoonIcon" :class="isDark ? 'w-8 h-7' : 'w-8 h-6'" />
                 <span>{{ isDark ? 'Clear mode' : 'Dark mode' }}</span>
               </button>
@@ -52,14 +52,25 @@
               <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
 
               <!-- Edit Profile Button -->
+              <Link :href="route('realtor.listing.index')"
+                class="w-full flex items-center justify-start gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+              <UserCircleIcon class="w-8 h-6" />
+              <span>Realtor Profile</span>
+              </Link>
+
+              <!-- Divider -->
+              <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+
+              <!-- Edit Profile Button -->
               <button
-                class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                class="w-full flex items-center justify-start gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
                 <PencilSquareIcon class="w-8 h-6" />
                 <span>Edit Profile</span>
               </button>
 
               <!-- Divider -->
               <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+
               <!-- Logout Button -->
               <Link :href="route('logout')" method="delete" as="button"
                 class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-white bg-[indianred] hover:bg-[firebrick] transition">
@@ -111,6 +122,7 @@ import {
   MoonIcon,
   PlusIcon,
   ListBulletIcon,
+  UserCircleIcon,
   ArrowLeftOnRectangleIcon
 } from '@heroicons/vue/24/solid'
 

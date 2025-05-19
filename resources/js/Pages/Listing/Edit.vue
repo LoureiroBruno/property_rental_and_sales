@@ -1,4 +1,6 @@
 <template>
+    <h1 class="text-3xl mb-4 label">Edit List</h1>
+
     <form @submit.prevent="update" class="w-full mx-auto p-6 bg-white dark:bg-gray-900 rounded-md shadow-md">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-2">

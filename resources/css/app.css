@@ -49,4 +49,8 @@
   .btn-normal {
     @apply bg-gray-600 hover:bg-gray-500 text-white font-medium p-2 rounded-md
   }
+
+  .btn-outline {
+    @apply border rounded px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 transition;
+  }
 }

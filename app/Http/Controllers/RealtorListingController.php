@@ -11,23 +11,8 @@ use Inertia\Response;
 
 class RealtorListingController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Listing::class, 'listing');
-    // }
-
     public function index(Request $request)
     {
-
-        // $filter = [
-        //     'deleted' => $request->boolean('deleted')
-        // ];
-
-        // return inertia(
-        //     'Realtor/Index',
-        //     ['Listings' => Auth::user()->listings()->mostRecent()]
-        // );
-
         Gate::authorize(
             'viewAny',
             Listing::class
@@ -46,7 +31,7 @@ class RealtorListingController extends Controller
                     ->filter($filters)
                     ->withCount('images')
                     ->withCount('offers')
-                    ->paginate(5)
+                    ->paginate(15)
                     ->withQueryString()
             ]
         );

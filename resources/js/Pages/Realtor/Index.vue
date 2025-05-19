@@ -41,14 +41,11 @@
                         <i class="fas fa-pen"></i> Edit
                         </Link>
 
-
-                        <!-- Delete - vermelho -->
-                        <Link v-if="!listing.deleted_at"
-                            :href="route('realtor.listing.destroy', { listing: listing.id })" as="button"
-                            method="delete"
+                        <button v-if="!listing.deleted_at"
+                            @click="confirmDelete('realtor.listing.destroy', { listing: listing.id })"
                             class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border text-red-600 border-red-400 hover:bg-red-100 transition">
-                        <i class="fas fa-trash-alt"></i> Delete
-                        </Link>
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
 
                         <!-- Restore - verde -->
                         <Link v-else :href="route('realtor.listing.restore', { listing: listing.id })" as="button"
@@ -84,6 +81,7 @@
 </template>
 
 <script setup>
+import { useConfirmDelete } from '@/Composables/useConfirmDelete.js'
 import ListingAddress from '@/Components/ListingAddress.vue'
 import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
@@ -98,4 +96,6 @@ defineProps({
     listings: Object,
     filters: Object,
 })
+
+const { confirmDelete } = useConfirmDelete()
 </script>

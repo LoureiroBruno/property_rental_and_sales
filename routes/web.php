@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
@@ -14,9 +15,9 @@ Route::get('/', function () {
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/hello', [IndexController::class, 'show'])->middleware('auth');
 
-// Route::resource('listing', ListingController::class)
-//     ->only(['index', 'show']); o que vai valer
-Route::resource('listing', App\Http\Controllers\ListingController::class)->middleware('auth');
+Route::resource('listing', ListingController::class)
+    ->only(['index', 'show']);
+// Route::resource('listing', App\Http\Controllers\ListingController::class)->middleware('auth');
 // Route::resource('listing', App\Http\Controllers\ListingController::class)
 //     ->only(['create, store, edit, update'])
 //     ->middleware('auth');

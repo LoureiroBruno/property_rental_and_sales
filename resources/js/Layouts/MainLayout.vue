@@ -13,7 +13,7 @@
             Listings
             </Link>
 
-            <Link :href="route('listing.create')"
+            <Link :href="route('realtor.listing.create')"
               class="flex items-center gap-2 font-bold text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
             <PlusIcon class="w-6 h-6" />
             New Listing

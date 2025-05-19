@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListingRequest;
 use App\Models\Listing;
 use Gate;
 use Illuminate\Http\Request;
@@ -63,24 +64,14 @@ class RealtorListingController extends Controller
         return Inertia::render('Realtor/Create');
     }
 
-    public function store(Request $request)
+    public function store(ListingRequest $request)
     {
         Gate::authorize(
             'create',
             Listing::class
         );
-        $request->user()->listings()->create(
-            $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:15|max:1500',
-                'city' => 'required',
-                'code' => 'required',
-                'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
-            ])
-        );
+
+        $request->user()->listings()->create($request->validated());
 
         return redirect()->route('realtor.listing.index')
             ->with('success', 'Listing was created!');
@@ -100,24 +91,14 @@ class RealtorListingController extends Controller
         );
     }
 
-    public function update(Request $request, Listing $listing)
+    public function update(ListingRequest $request, Listing $listing)
     {
         Gate::authorize(
             'update',
             $listing
         );
-        $listing->update(
-            $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:15|max:1500',
-                'city' => 'required',
-                'code' => 'required',
-                'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
-            ])
-        );
+
+        $listing->update($request->validated());
 
         return redirect()->route('realtor.listing.index')
             ->with('success', 'Listing was changed!');

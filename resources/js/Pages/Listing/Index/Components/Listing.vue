@@ -18,13 +18,13 @@
 
             <!-- Ações (editar e deletar) -->
             <div class="grid gap-2 md:text-right w-full md:w-auto">
-                <div v-if="listing.can.edit">
-                    <Link :href="route('listing.edit', { listing: listing.id })"
+                <!-- <div v-if="listing.can.edit">
+                    <Link :href="route('realtor.listing.edit', { listing: listing.id })"
                         class="btn-sky flex items-center justify-center gap-1 px-4 py-1 text-sm rounded w-full md:w-auto">
                     <PencilSquareIcon class="w-4 h-4" />
                     Edit
                     </Link>
-                </div>
+                </div> -->
 
                 <!-- <div v-if="listing.can.delete">
                     <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
@@ -48,7 +48,7 @@ import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
 import { useMonthlyPayment } from '@/Composables/useMonthlyPayment'
 import { useConfirmDelete } from '@/Composables/useConfirmDelete'
-import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
+// import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 const { confirmDelete } = useConfirmDelete()
 const props = defineProps({ listing: Object })

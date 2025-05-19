@@ -24,7 +24,6 @@
 
         <!-- Direita -->
         <div v-if="user" class="relative flex items-center gap-6">
-
           <div class="relative" id="user-menu">
             <button @click="toggleDropdown" class="flex items-center gap-2 px-4 py-2  bg-stone-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
               rounded-md shadow-lg z-50 overflow-hidden">
@@ -40,37 +39,37 @@
             <!-- Dropdown -->
             <div v-if="open" class="absolute right-0 mt-2 w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 
               rounded-md shadow-lg z-50 overflow-hidden">
+              <div id="tester" class="w-full justify-center">
+                <!-- Dark/Light Mode Toggle Button -->
+                <button @click="toggleTheme"
+                  class="w-full flex items-center justify-start gap-1 px-4 py-2 pl-12 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                  <component :is="isDark ? SunIcon : MoonIcon" :class="isDark ? 'w-8 h-7' : 'w-8 h-6'" />
+                  <span>{{ isDark ? 'Clear mode' : 'Dark mode' }}</span>
+                </button>
 
-              <!-- Dark/Light Mode Toggle Button -->
-              <button @click="toggleTheme"
-                class="w-full flex items-center justify-start gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-                <component :is="isDark ? SunIcon : MoonIcon" :class="isDark ? 'w-8 h-7' : 'w-8 h-6'" />
-                <span>{{ isDark ? 'Clear mode' : 'Dark mode' }}</span>
-              </button>
+                <!-- Divider -->
+                <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
 
-              <!-- Divider -->
-              <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+                <!-- Edit Profile Button -->
+                <Link :href="route('realtor.listing.index')"
+                  class="w-full flex items-center justify-start gap-1 px-4 py-2 pl-12 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                <UserCircleIcon class="w-8 h-6" />
+                <span>Realtor Profile</span>
+                </Link>
 
-              <!-- Edit Profile Button -->
-              <Link :href="route('realtor.listing.index')"
-                class="w-full flex items-center justify-start gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-              <UserCircleIcon class="w-8 h-6" />
-              <span>Realtor Profile</span>
-              </Link>
+                <!-- Divider -->
+                <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
 
-              <!-- Divider -->
-              <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+                <!-- Edit Profile Button -->
+                <button
+                  class="w-full flex items-center justify-start gap-1 px-4 py-2 pl-12 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+                  <PencilSquareIcon class="w-8 h-6" />
+                  <span>Edit Profile</span>
+                </button>
 
-              <!-- Edit Profile Button -->
-              <button
-                class="w-full flex items-center justify-start gap-1 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-                <PencilSquareIcon class="w-8 h-6" />
-                <span>Edit Profile</span>
-              </button>
-
-              <!-- Divider -->
-              <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
-
+                <!-- Divider -->
+                <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
+              </div>
               <!-- Logout Button -->
               <Link :href="route('logout')" method="delete" as="button"
                 class="w-full flex items-center justify-center gap-1 px-4 py-2 text-sm text-white bg-[indianred] hover:bg-[firebrick] transition">
@@ -78,9 +77,7 @@
               <span>Logout</span>
               </Link>
             </div>
-
           </div>
-
         </div>
       </nav>
     </div>

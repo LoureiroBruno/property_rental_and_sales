@@ -22,6 +22,15 @@
             <Link :href="route('listing.index')">Property Rental and Sales</Link>
           </div>
 
+          <Link class="text-gray-500 relative pr-2 py-2 text-lg" :href="route('notification.index')">
+          🔔
+          <div v-if="notificationCount"
+            class="absolute right-0 top-0 w-5 h-5 bg-red-700 dark:bg-red-400 text-white font-medium border border-white dark:border-gray-900 rounded-full text-xs text-center">
+            {{ notificationCount }}
+          </div>
+          <span>Notifications</span>
+          </Link>
+
           <div class="relative flex items-center gap-6">
 
             <div id="user-menu" class="relative">

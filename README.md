@@ -19,17 +19,192 @@
     </a>
 </p>
 
+---
+
+# Projeto Laravel + Vue 3 + Inertia.js + Vite
+
+Este projeto utiliza o framework Laravel no backend, com Vue 3 no frontend, integrados através do Inertia.js e empacotados com Vite. O ambiente de desenvolvimento pode ser executado com Docker.
+
+---
+
+## 🔧 Tecnologias Utilizadas
+
+-   [Laravel](https://laravel.com)
+-   [Vue.js 3](https://vuejs.org/)
+-   [Inertia.js](https://inertiajs.com/)
+-   [Vite](https://vitejs.dev/)
+-   [Docker](https://www.docker.com/)
+-   [Composer](https://getcomposer.org/)
+-   [Node.js / NPM](https://nodejs.org/)
+
+---
+
+## ✅ Pré-requisitos
+
+-   PHP >= 8.2
+-   Composer
+-   Node.js >= 16
+-   Docker & Docker Compose
+
+---
+
+## 🚀 Instalação e Uso Local
+
+### ⚙️ Permissões em Ambiente Docker
+
+Verifique quem é o dono atual:
+
+```bash
+ls -l /home/bruno/projetos/property_rental_and_sales/app/Models/Listing.php
+```
+
+Se mostrar algo como `root root`, então o VS Code (via seu usuário `nome_do_usuario`) não tem como escrever no arquivo.
+
+Corrija o dono para o seu usuário (`nome_do_usuario`):
+
+```bash
+sudo chown -R nome_do_usuario:nome_do_usuario /home/nome_do_usuario/projetos/property_rental_and_sales
+```
+
+Isso muda o "dono" dos arquivos para você, sem alterar permissões.
+
+Reinicie o VS Code e tente salvar novamente.
+
+Para que o Laravel funcione corretamente com logs e cache, é necessário garantir que o servidor web (normalmente o usuário `www-data` dentro do container) tenha acesso de escrita aos diretórios `storage` e `bootstrap/cache`.
+
+Após subir os containers com Docker Compose, execute o seguinte comando no terminal (fora do container):
+
+```bash
+docker exec -it <nome_do_container_app> chown -R www-data:www-data /application/storage /application/bootstrap/cache
+```
+
+Substitua `<nome_do_container_app>` pelo nome correto do container, por exemplo:
+
+```bash
+docker exec -it property_rental_and_sales-app-1 chown -R www-data:www-data /application/storage /application/bootstrap/cache
+```
+
+Esse comando garante que o Laravel possa gravar os logs e cachear arquivos corretamente, evitando erros como:
+
+```
+The stream or file "/application/storage/logs/laravel.log" could not be opened in append mode: Permission denied
+```
+
+---
+
+### 🔹 Clonar o repositório
+
+```bash
+git clone https://github.com/seu-usuario/seu-projeto.git
+cd seu-projeto
+```
+
+### 🔹 Subir o ambiente com Docker
+
+```bash
+docker-compose -f docker-compose.local.yml up -d
+```
+
+### 🔹 Instalar dependências PHP e JS
+
+```bash
+docker exec -it nome-do-container bash
+
+# Dentro do container
+composer install
+npm install
+```
+
+### 🔹 Gerar chave da aplicação e rodar migrações
+
+```bash
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+```
+
+### 🔹 Compilar os assets
+
+```bash
+npm run dev
+```
+
+---
+
+## ⚙️ Configurações do Inertia.js
+
+As seguintes configurações foram realizadas:
+
+-   Instalação do middleware do Inertia:
+
+    ```bash
+    php artisan inertia:middleware
+    ```
+
+-   Registro do middleware no `app/Http/Kernel.php`:
+
+    ```php
+    \App\Http\Middleware\HandleInertiaRequests::class,
+    ```
+
+-   Frontend inicializado com Vue 3 e plugin Vite:
+
+    ```bash
+    npm install --save-dev @vitejs/plugin-vue
+    ```
+
+---
+
+## 📂 Estrutura do Projeto (parcial)
+
+```
+resources/
+├── js/
+│   ├── Pages/
+│   │   └── Example.vue
+│   ├── app.js
+│   └── bootstrap.js
+├── views/
+│   └── app.blade.php
+```
+
+---
+
+## 🔪 Testes
+
+Você pode rodar os testes com:
+
+```bash
+php artisan test
+```
+
+---
+
+## Referências
+
+-   Documentação Laravel: https://laravel.com/docs/11.x
+-   Guia de Inertia.js com Laravel: https://inertiajs.com/server-side-setup
+-   Site oficial do Vite: https://vite.dev/
+
+---
+
+## 📝 Licença
+
+Este projeto está licenciado sob a [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -47,19 +222,19 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   **[Vehikl](https://vehikl.com/)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[WebReinvent](https://webreinvent.com/)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+-   **[Cyber-Duck](https://cyber-duck.co.uk)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Jump24](https://jump24.co.uk)**
+-   **[Redberry](https://redberry.international/laravel/)**
+-   **[Active Logic](https://activelogic.com)**
+-   **[byte5](https://byte5.de)**
+-   **[OP.GG](https://op.gg)**
 
 ## Contributing
 
@@ -72,26 +247,3 @@ In order to ensure that the Laravel community is welcoming to all, please review
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
----
-
-# Vue.js & Inertia.js Project
-
-Este projeto foi configurado para usar Vue.js e Inertia.js como front-end, junto com o Laravel no back-end. Aqui estão as etapas de configuração e uso.
-
-## Prerequisites
-
-1. PHP 8.2 ou superior
-2. Composer
-3. Docker (para rodar o ambiente de desenvolvimento)
-
-## Setup
-
-Para rodar o projeto localmente com Docker, utilize o seguinte comando:
-
-```bash
-docker-compose -f docker-compose.local.yml up -d

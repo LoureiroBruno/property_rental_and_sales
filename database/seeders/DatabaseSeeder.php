@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Listing;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $admin = User::factory()->create([
+            'name' => 'Administrator Profile',
+            'email' => 'admin@example.com',
+            'is_admin' => true
         ]);
+
+        Listing::factory(10)->create(['by_user_id' => 1]);
+        Listing::factory(10)->create(['by_user_id' => 2]);
+
+        Listing::factory(10)->create(['by_user_id' => 11]);
+
+        $project = Project::firstOrCreate([
+            'name' => 'Test Project',
+        ]);
+
+        // Associate the project with the administrator user
+        $project->users()->syncWithoutDetaching([$admin->id]);
     }
 }

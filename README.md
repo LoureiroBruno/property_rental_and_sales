@@ -37,7 +37,7 @@ Visualização de algumas telas do sistema de aluguel e venda de imóveis:
 
 | Detalhes do Imóvel | Cadastro/Administração |
 |---------------------|------------------------|
-| ![Tela 3]() | ![Tela 4](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/real-estate-broker-anagement-area.png?raw=true) |
+| ![Tela 3](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/property-details.png) | ![Tela 4](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/real-estate-broker-anagement-area.png?raw=true) |
 
 | Notificações | E-mails Automáticos |
 |--------------|----------------------|
@@ -45,7 +45,11 @@ Visualização de algumas telas do sistema de aluguel e venda de imóveis:
 
 | Acesso a Area Administrativa | Cadastro de Usuário |
 |--------------|----------------------|
-| ![Tela 5](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/top-navigation.png?raw=true) | ![Tela 6](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/email-notifications.png?raw=true) |
+| ![Tela 7](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/top-navigation.png?raw=true) | ![Tela 8](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/email-notifications.png?raw=true) |
+
+| Moodo de Visualização | Upload de Arquivos |
+|--------------|----------------------|
+| ![Tela 9](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/choose-view-mode.png) | ![Tela 10](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/uoload-files.png) |
 
 ---
 

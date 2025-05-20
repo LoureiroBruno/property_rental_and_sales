@@ -1,5 +1,9 @@
 <template>
-    <form @submit.prevent="update" class="w-full mx-auto p-6 bg-white dark:bg-gray-900 rounded-md shadow-md">
+    <h1 class="text-3xl mb-4 label">Edit List</h1>
+
+    <form @submit.prevent="update" class="w-full mx-auto p-6 bg-white border border-gray-300 text-gray-800 
+         dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 
+         rounded-md shadow-md">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-2">
                 <label class="label">Beds</label>
@@ -98,7 +102,7 @@ const form = useForm({
     street_nr: props.listing.street_nr,
     price: props.listing.price,
 })
-const update = () => form.put(route('listing.update', { listing: props.listing.id }))
+const update = () => form.put(route('realtor.listing.update', { listing: props.listing.id }))
 </script>
 
 <style scoped>

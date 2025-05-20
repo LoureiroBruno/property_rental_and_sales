@@ -52,21 +52,21 @@ class ListingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        // $this->authorize('create', Listing::class);
-        return inertia('Listing/Create');
-    }
+    // public function create()
+    // {
+    //     // $this->authorize('create', Listing::class);
+    //     return inertia('Listing/Create');
+    // }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ListingRequest $request)
-    {
-        $request->user()->listings()->create($request->validated());
+    // public function store(ListingRequest $request)
+    // {
+    //     $request->user()->listings()->create($request->validated());
 
-        return redirect()->route('listing.index')->with('success', 'Listing was created!');
-    }
+    //     return redirect()->route('listing.index')->with('success', 'Listing was created!');
+    // }
 
     /**
      * Display the specified resource.
@@ -84,40 +84,40 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Listing $listing)
-    {
-        return inertia(
-            'Listing/Edit',
-            [
-                'listing' => $listing
-            ]
-        );
-    }
+    // public function edit(Listing $listing)
+    // {
+    //     return inertia(
+    //         'Listing/Edit',
+    //         [
+    //             'listing' => $listing
+    //         ]
+    //     );
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ListingRequest $request, Listing $listing)
-    {
-        $this->authorize('update', $listing);
+    // public function update(ListingRequest $request, Listing $listing)
+    // {
+    //     $this->authorize('update', $listing);
 
-        $listing->update($request->validated());
+    //     $listing->update($request->validated());
 
 
-        return redirect()->route('listing.index')
-            ->with('success', 'Listing was changed!');
-    }
+    //     return redirect()->route('listing.index')
+    //         ->with('success', 'Listing was changed!');
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Listing $listing)
-    {
-        $this->authorize('delete', $listing);
+    // public function destroy(Listing $listing)
+    // {
+    //     $this->authorize('delete', $listing);
 
-        $listing->delete();
+    //     $listing->delete();
 
-        return redirect()->back()
-            ->with('success', 'Listing was deleted!');
-    }
+    //     return redirect()->back()
+    //         ->with('success', 'Listing was deleted!');
+    // }
 }

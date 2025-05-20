@@ -2,31 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Listing extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * This defines which fields can be automatically filled
-     * when using methods like Model::create() or Model::update().
-     *
-     * For security, Laravel protects models against the mass assignment
-     * of unauthorized fields. Only the attributes listed here
-     * can be assigned in bulk operations.
-     *
-     * Example usage:
-     * Model::create([
-     *     'name' => 'João',
-     *     'email' => 'joao@email.com'
-     * ]);
-     */
     protected $fillable = [
         'beds',
         'baths',
@@ -37,6 +23,10 @@ class Listing extends Model
         'street_nr',
         'price'
     ];
+    protected $sortable = [
+        'price',
+        'created_at'
+    ];
 
     public function owner(): BelongsTo
     {
@@ -46,9 +36,24 @@ class Listing extends Model
         );
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ListingImage::class);
+    }
+
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class, 'listing_id');
+    }
+
     public function scopeMostRecent(Builder $query): Builder
     {
         return $query->orderByDesc('created_at');
+    }
+
+    public function scopeWithoutSold(Builder $query): Builder
+    {
+        return $query->whereNull('sold_at');
     }
 
     public function scopeFilter(Builder $query, array $filters): Builder
@@ -71,6 +76,15 @@ class Listing extends Model
         )->when(
             $filters['areaTo'] ?? false,
             fn($query, $value) => $query->where('area', '<=', $value)
+        )->when(
+            $filters['deleted'] ?? false,
+            fn($query, $value) => $query->withTrashed()
+        )->when(
+            $filters['by'] ?? false,
+            fn($query, $value) =>
+            !in_array($value, $this->sortable)
+                ? $query :
+                $query->orderBy($value, $filters['order'] ?? 'desc')
         );
     }
 }

@@ -157,3 +157,27 @@ Route::prefix('realtor')
         Route::resource('listing.image', RealtorListingImageController::class)
             ->only(['create', 'store', 'destroy']);
     });
+
+
+// mail test
+
+use App\Models\Project;
+use App\Models\User;
+use App\Mail\ProjectAssigned;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email', function () {
+    $user = User::first();
+    $project = Project::first();
+
+    if (!$user || !$project) {
+        return response()->json([
+            'error' => 'User or project not found. Create at least one user and one project in the database'
+        ], 404);
+    }
+
+    $project->users()->syncWithoutDetaching([$user->id]);
+    Mail::to($user->email)->send(new ProjectAssigned($project));
+
+    return 'Email sent successfully!';
+});

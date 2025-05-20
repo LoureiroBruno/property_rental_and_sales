@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class User extends Authenticatable
 {
@@ -84,5 +85,10 @@ class User extends Authenticatable
             Offer::class,
             'bidder_id'
         );
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
     }
 }

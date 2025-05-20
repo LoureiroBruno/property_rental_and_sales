@@ -55,7 +55,7 @@ Este projeto utiliza o framework Laravel no backend, com Vue 3 no frontend, inte
 Verifique quem é o dono atual:
 
 ```bash
-ls -l /home/bruno/projetos/property_rental_and_sales/app/Models/Listing.php
+ls -l /home/nome_do_usuario/nome_da_pasta_de_projetos/property_rental_and_sales/
 ```
 
 Se mostrar algo como `root root`, então o VS Code (via seu usuário `nome_do_usuario`) não tem como escrever no arquivo.

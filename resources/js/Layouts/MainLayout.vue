@@ -223,13 +223,45 @@ watch(() => page.url, () => {
   ✅ Flash messages (fechamento)
 ============================ */
 const localFlash = ref({
-  success: flash.value?.success || null,
-  error: flash.value?.error || null,
+  success: flash.value.success || '',
+  error: flash.value.error || '',
 })
 
+// Atualiza localFlash ao receber novas mensagens do servidor
+watch(flash, (newFlash) => {
+  if (newFlash.success) localFlash.value.success = newFlash.success
+  if (newFlash.error) localFlash.value.error = newFlash.error
+})
+
+// Timeouts para fechar mensagens automaticamente
+let successTimeout = null
+let errorTimeout = null
+
 const closeMessage = (type) => {
-  localFlash.value[type] = null
+  localFlash.value[type] = ''
+  if (type === 'success' && successTimeout) {
+    clearTimeout(successTimeout)
+    successTimeout = null
+  }
+  if (type === 'error' && errorTimeout) {
+    clearTimeout(errorTimeout)
+    errorTimeout = null
+  }
 }
+
+watch(() => localFlash.value.success, (val) => {
+  if (val) {
+    if (successTimeout) clearTimeout(successTimeout)
+    successTimeout = setTimeout(() => closeMessage('success'), 3000)
+  }
+})
+
+watch(() => localFlash.value.error, (val) => {
+  if (val) {
+    if (errorTimeout) clearTimeout(errorTimeout)
+    errorTimeout = setTimeout(() => closeMessage('error'), 3000)
+  }
+})
 </script>
 
 <style scoped>

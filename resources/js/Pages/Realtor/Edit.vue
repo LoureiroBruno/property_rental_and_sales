@@ -85,6 +85,7 @@
 </template>
 
 <script setup>
+import { usePage } from '@inertiajs/vue3'
 import { Link } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
 import { PencilSquareIcon, XMarkIcon } from '@heroicons/vue/24/solid'

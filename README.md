@@ -21,21 +21,45 @@
 
 ---
 
-# Projeto Laravel + Vue 3 + Inertia.js + Vite
+# 🏠 Property Rental and Sales 
+#### [ Projeto Laravel + Vue 3 + Inertia.js + Vite ]
 
+Sistema web completo para gerenciamento de imóveis para **aluguel** e **venda**, com frontend moderno, backend robusto e ambiente pronto para desenvolvimento via **Docker Compose**.
 Este projeto utiliza o framework Laravel no backend, com Vue 3 no frontend, integrados através do Inertia.js e empacotados com Vite. O ambiente de desenvolvimento pode ser executado com Docker.
+
+## 📷 Prints do Sistema
+
+Visualização de algumas telas do sistema de aluguel e venda de imóveis:
+
+| Tela Inicial | Lista de Imóveis |
+|--------------|------------------|
+| ![Tela 1](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/login.png?raw=true) | ![Tela 2](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/property-listing-customer-area.png?raw=true) |
+
+| Detalhes do Imóvel | Cadastro/Administração |
+|---------------------|------------------------|
+| ![Tela 3]() | ![Tela 4](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/real-estate-broker-anagement-area.png?raw=true) |
+
+| Notificações | E-mails Automáticos |
+|--------------|----------------------|
+| ![Tela 5](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/notification-panel.png?raw=true) | ![Tela 6](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/email-notifications.png?raw=true) |
+
+| Acesso a Area Administrativa | Cadastro de Usuário |
+|--------------|----------------------|
+| ![Tela 5](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/top-navigation.png?raw=true) | ![Tela 6](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/email-notifications.png?raw=true) |
 
 ---
 
 ## 🔧 Tecnologias Utilizadas
 
--   [Laravel](https://laravel.com)
--   [Vue.js 3](https://vuejs.org/)
--   [Inertia.js](https://inertiajs.com/)
--   [Vite](https://vitejs.dev/)
--   [Docker](https://www.docker.com/)
--   [Composer](https://getcomposer.org/)
--   [Node.js / NPM](https://nodejs.org/)
+- ⚙️ **Backend**: [Laravel](https://laravel.com/)
+- 📦 **Gerenciador de Dependências**: [Composer](https://getcomposer.org/)
+- 💻 **Ambiente de Execução**: [Node.js / NPM](https://nodejs.org/)
+- ⚡ **Frontend**: [Vue 3](https://vuejs.org/) + [Inertia.js](https://inertiajs.com/)
+- 🎨 **Estilização**: [Tailwind CSS](https://tailwindcss.com/)
+- 🧱 **Banco de Dados**: PostgreSQL
+- 🐳 **Ambiente de Container**: Docker + Docker Compose
+- 🧩 **Ícones**: Font Awesome + Heroicons
+- 📦 **Outros**: Laravel Breeze, Eloquent ORM, Vite, Upload de arquivos
 
 ---
 

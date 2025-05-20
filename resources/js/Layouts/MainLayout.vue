@@ -22,14 +22,18 @@
             <Link :href="route('listing.index')">Property Rental and Sales</Link>
           </div>
 
-          <Link class="text-gray-500 relative pr-2 py-2 text-lg" :href="route('notification.index')">
-          🔔
-          <div v-if="notificationCount"
-            class="absolute right-0 top-0 w-5 h-5 bg-red-700 dark:bg-red-400 text-white font-medium border border-white dark:border-gray-900 rounded-full text-xs text-center">
-            {{ notificationCount }}
+          <Link class="flex items-center text-xl text-gray-800 dark:text-gray-200 gap-2 relative"
+            :href="route('notification.index')">
+          <div class="relative">
+            <BellIcon class="w-6 h-6" />
+            <div v-if="notificationCount"
+              class="absolute -right-1 -top-1 w-5 h-5 bg-red-700 dark:bg-red-400 text-white font-medium border border-white dark:border-gray-900 rounded-full text-xs text-center">
+              {{ notificationCount }}
+            </div>
           </div>
           <span>Notifications</span>
           </Link>
+
 
           <div class="relative flex items-center gap-6">
 
@@ -139,8 +143,10 @@
   </main>
 </template>
 
-
 <script setup>
+/* ============================
+  📦 Imports
+============================ */
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import {
@@ -153,55 +159,69 @@ import {
   ListBulletIcon,
   UserCircleIcon,
   ArrowRightOnRectangleIcon,
-  ArrowLeftOnRectangleIcon
+  ArrowLeftOnRectangleIcon,
+  BellIcon
 } from '@heroicons/vue/24/solid'
 
-// --- Dados reativos da página ---
+/* ============================
+  📄 Propriedades Globais (Inertia)
+============================ */
 const page = usePage()
-
-// Usuário autenticado
 const user = computed(() => page.props.user)
-
-// Flash messages recebidos via props (somente leitura)
+const notificationCount = computed(() => page.props.notificationCount || 0)
 const flash = computed(() => page.props.flash)
 
-// --- Controle de tema (dark/light) ---
+/* ============================
+  💡 Tema (Dark/Light)
+============================ */
 const isDark = ref(false)
-onMounted(() => {
-  isDark.value = document.documentElement.classList.contains('dark')
-})
+
 const toggleTheme = () => {
   isDark.value = !isDark.value
   document.documentElement.classList.toggle('dark', isDark.value)
 }
 
-// --- Dropdown de usuário ---
+onMounted(() => {
+  isDark.value = document.documentElement.classList.contains('dark')
+})
+
+/* ============================
+  🔽 Dropdown do usuário
+============================ */
 const open = ref(false)
 
 const toggleDropdown = () => {
   open.value = !open.value
 }
 
-// Fecha dropdown ao clicar fora
+const closeDropdownClick = () => {
+  open.value = false
+}
+
 const closeDropdown = (event) => {
   if (!event.target.closest('#user-menu')) {
     open.value = false
   }
 }
 
-function closeDropdownClick() {
-  open.value = false;
-}
-
+// Fecha dropdown ao clicar fora
 onMounted(() => {
   window.addEventListener('click', closeDropdown)
 })
+
+// Remove listener ao desmontar
 onBeforeUnmount(() => {
   window.removeEventListener('click', closeDropdown)
 })
 
-// --- Controle local para mensagens flash (para fechar manual/automaticamente) ---
-// Copiamos o conteúdo inicial para estado reativo local, pois flash é computed readonly
+// Fecha dropdown ao navegar para outra página
+watch(() => page.url, () => {
+  open.value = false
+})
+
+/* ============================
+  ✅ Flash messages (fechamento)
+============================ */
 const localFlash = ref({
   success: flash.value.success || '',
   error: flash.value.error || '',
@@ -243,3 +263,7 @@ watch(() => localFlash.value.error, (val) => {
   }
 })
 </script>
+
+<style scoped>
+/* Adicione estilos customizados se necessário */
+</style>

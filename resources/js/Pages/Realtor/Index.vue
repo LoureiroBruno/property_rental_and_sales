@@ -27,46 +27,51 @@
                 <div class="flex flex-col gap-3 md:items-end md:w-64">
                     <!-- Ações principais -->
                     <div class="flex flex-wrap gap-2 justify-center md:justify-end w-full">
-                        <!-- Preview - cinza -->
-                        <a :href="route('listing.show', { listing: listing.id })" target="_blank" class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border 
-          text-gray-600 border-gray-400 hover:bg-gray-100 
-          dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 transition">
-                            <i class="fas fa-eye"></i> Preview
-                        </a>
+                        <template v-if="!listing.deleted_at">
+                            <!-- Preview - cinza -->
+                            <a :href="route('listing.show', { listing: listing.id })" class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border 
+        text-teal-600 border-teal-400 hover:bg-teal-100 
+        dark:text-teal-300 dark:border-teal-600 dark:hover:bg-teal-800 transition">
+                                <i class="fas fa-eye"></i> Preview
+                            </a>
 
-                        <!-- Edit - azul -->
-                        <Link :href="route('realtor.listing.edit', { listing: listing.id })" class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border 
-             text-blue-600 border-blue-400 hover:bg-blue-100 
-             dark:text-blue-400 dark:border-blue-500 dark:hover:bg-blue-900 transition">
-                        <i class="fas fa-pen"></i> Edit
-                        </Link>
+                            <!-- Edit - azul -->
+                            <Link :href="route('realtor.listing.edit', { listing: listing.id })" class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border 
+        text-sky-600 border-sky-400 hover:bg-sky-100 
+        dark:text-sky-400 dark:border-sky-500 dark:hover:bg-sky-900 transition">
+                            <i class="fas fa-pen"></i> Edit
+                            </Link>
 
-                        <button v-if="!listing.deleted_at"
-                            @click="confirmDelete('realtor.listing.destroy', { listing: listing.id })"
-                            class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border text-red-600 border-red-400 hover:bg-red-100 transition">
-                            <i class="fas fa-trash-alt"></i> Delete
-                        </button>
+                            <!-- Delete - vermelho -->
+                            <button @click="confirmDelete('realtor.listing.destroy', { listing: listing.id })"
+                                class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border text-red-600 border-red-400 hover:bg-red-100 transition">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </template>
 
-                        <!-- Restore - verde -->
+                        <!-- Restore - quando deletado -->
                         <Link v-else :href="route('realtor.listing.restore', { listing: listing.id })" as="button"
                             method="put"
-                            class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border text-green-600 border-green-400 hover:bg-green-100 transition">
+                            class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border text-rose-600 border-rose-400 hover:bg-rose-100 transition">
                         <i class="fas fa-undo-alt"></i> Restore
                         </Link>
                     </div>
-
                     <!-- Imagens e Ofertas -->
-                    <div class="flex flex-wrap gap-2">
-                        <Link :href="route('realtor.listing.image.create', { listing: listing.id })"
-                            class="btn-outline text-xs font-medium flex items-center gap-1">
-                        <i class="fas fa-image"></i> Images ({{ listing.images_count }})
-                        </Link>
+                    <template v-if="!listing.deleted_at">
+                        <div class="flex flex-wrap gap-2">
+                            <Link :href="route('realtor.listing.image.create', { listing: listing.id })" class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border 
+        text-gray-600 border-gray-400 hover:bg-gray-100 
+        dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 transition">
+                            <i class="fas fa-image"></i> Images ({{ listing.images_count }})
+                            </Link>
 
-                        <Link :href="route('realtor.listing.show', { listing: listing.id })"
-                            class="btn-outline text-xs font-medium flex items-center gap-1">
-                        <i class="fas fa-handshake"></i> Offers ({{ listing.offers_count }})
-                        </Link>
-                    </div>
+                            <Link :href="route('realtor.listing.show', { listing: listing.id })" class="text-xs inline-flex items-center gap-1 font-medium px-3 py-1 rounded border 
+        text-gray-600 border-gray-400 hover:bg-gray-100 
+        dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 transition">
+                            <i class="fas fa-handshake"></i> Offers ({{ listing.offers_count }})
+                            </Link>
+                        </div>
+                    </template>
                 </div>
             </div>
         </Box>

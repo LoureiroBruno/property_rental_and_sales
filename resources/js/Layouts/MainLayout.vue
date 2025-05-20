@@ -49,12 +49,12 @@
 
                   <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
 
-                  <!-- Edit Profile Button -->
-                  <button @click="closeDropdownClick"
-                    class="w-full flex items-center justify-start gap-1 px-4 py-2 pl-8 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-                    <UserCircleIcon class="w-8 h-6" />
-                    <span>My Access Profile</span>
-                  </button>
+                  <Link :href="route('user-account.edit')"
+                    class="w-full flex items-center justify-start gap-1 px-4 py-2 pl-8 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    @click="closeDropdownClick">
+                  <UserCircleIcon class="w-8 h-6" />
+                  <span>My Access Profile</span>
+                  </Link>
 
                   <div class="h-px bg-gray-200 dark:bg-gray-700 my-1"></div>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
 use App\Http\Controllers\UserAccountController;
+use App\Models\Listing;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -20,12 +21,14 @@ use Illuminate\Http\Request;
 */
 
 // Home page (renders Inertia view directly)
-Route::get('/', function () {
-    return inertia('Index/Index');
-});
+// Route::get('/', function () {
+//     return inertia('Index/Index');
+// });
 
 // Home page handled by controller
-Route::get('/', [IndexController::class, 'index']);
+// Route::get('/', [IndexController::class, 'index']);
+
+Route::get('/', [ListingController::class, 'index']);
 
 // Authenticated "hello" route (example/test route)
 Route::get('/listing', [IndexController::class, 'show'])->middleware('auth');
@@ -116,6 +119,11 @@ Route::post('/email/verification-notification', function (Request $request) {
 // Create a new user account (only create/store)
 Route::resource('user-account', UserAccountController::class)
     ->only(['create', 'store']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user-account/profile', [UserAccountController::class, 'edit'])->name('user-account.edit');
+    Route::put('/user-account/{user}', [UserAccountController::class, 'update'])->name('user-account.update');
+});
 
 /*
 |--------------------------------------------------------------------------

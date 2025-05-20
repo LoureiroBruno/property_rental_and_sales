@@ -45,7 +45,7 @@ Visualização de algumas telas do sistema de aluguel e venda de imóveis:
 
 | Acesso a Area Administrativa | Cadastro de Usuário |
 |--------------|----------------------|
-| ![Tela 7](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/top-navigation.png?raw=true) | ![Tela 8](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/email-notifications.png?raw=true) |
+| ![Tela 7](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/top-navigation.png?raw=true) | ![Tela 8](https://github.com/LoureiroBruno/property_rental_and_sales/blob/develop/public/%20system_images/user-registration.png) |
 
 | Moodo de Visualização | Upload de Arquivos |
 |--------------|----------------------|

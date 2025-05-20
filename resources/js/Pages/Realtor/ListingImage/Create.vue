@@ -20,7 +20,7 @@
                     </button>
 
                     <!-- Botão Cancelar -->
-                    <Link :href="route('listing.index')"
+                    <Link :href="route('realtor.listing.index')"
                         class="btn-normal flex items-center gap-2 px-4 py-2 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
                     <XMarkIcon class="w-5 h-5" />
                     <span>Cancelar</span>

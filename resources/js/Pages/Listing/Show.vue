@@ -116,7 +116,14 @@ const user = computed(() => page.props.user)
 
 const getImageUrl = (src) => {
     if (!src) return ''
+
+    // If it is a full URL (eg external images)
     if (src.startsWith('http')) return src
-    return `http://localhost:8084/storage/images/${src}`
+
+    // If it is in the default Laravel path (after storage:link)
+    if (src.startsWith('storage')) return `/${src}`
+
+    // Otherwise, assume it is in storage/images
+    return `/storage/images/${src}`
 }
 </script>

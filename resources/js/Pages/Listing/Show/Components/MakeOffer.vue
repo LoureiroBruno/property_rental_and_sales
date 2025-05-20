@@ -11,9 +11,9 @@
                     Make an Offer
                 </button>
                 <br>
-                <button type="button" @click="goBack"
+                <button type="button" @click="goToListing"
                     class="w-full mt-2 text-sm font-semibold border border-gray-400 text-gray-600 rounded-lg px-4 py-2 hover:bg-gray-200 transition">
-                    ← Close Tab
+                    ← Go Back
                 </button>
 
                 {{ form.errors.amount }}
@@ -34,6 +34,7 @@ import Box from '@/Components/UI/Box.vue'
 import { useForm } from '@inertiajs/vue3'
 import { computed, watch } from 'vue'
 import { debounce } from 'lodash'
+import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
     listingId: Number,
@@ -64,7 +65,7 @@ watch(
     debounce((value) => emit('offerUpdated', value), 200),
 )
 
-function goBack() {
-    window.close()
+function goToListing() {
+    router.visit(route('listing.index'))
 }
 </script>

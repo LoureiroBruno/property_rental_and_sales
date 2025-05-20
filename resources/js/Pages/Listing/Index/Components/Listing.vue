@@ -1,43 +1,28 @@
 <template>
-    <Box>
-        <div class="w-full flex flex-col md:flex-row md:justify-between gap-4">
-            <!-- Bloco principal com informações -->
-            <div class="relative group">
-                <Link :href="route('listing.show', { listing: listing.id })">
-                <div class="flex items-center gap-1">
-                    <Price :price="listing.price" class="text-2xl font-bold" />
-                    <div class="text-xs text-gray-500">
-                        <Price :price="monthlyPayment" /> pm
+    <Box
+        class="w-full h-full p-4 shadow-sm rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow bg-white dark:bg-gray-800">
+        <div class="flex flex-col justify-between h-full">
+            <div class="relative group flex-1">
+                <Link :href="route('listing.show', { listing: listing.id })" class="block h-full w-full">
+                <div class="mb-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <Price :price="listing.price" class="text-2xl font-semibold text-gray-800 dark:text-gray-100" />
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            <Price :price="monthlyPayment" />
+                            <span class="text-xs">/ mês</span>
+                        </div>
                     </div>
+
+                    <ListingSpace :listing="listing" class="text-lg text-gray-700 dark:text-gray-300 mb-1" />
+                    <ListingAddress :listing="listing" class="text-sm text-gray-500 dark:text-gray-400" />
                 </div>
-                <ListingSpace :listing="listing" class="text-lg" />
-                <ListingAddress :listing="listing" class="text-gray-500" />
                 </Link>
-                <Tooltip text="Click to view price, space, address, and full property information" position="top" />
-            </div>
 
-            <!-- Ações (editar e deletar) -->
-            <div class="grid gap-2 md:text-right w-full md:w-auto">
-                <!-- <div v-if="listing.can.edit">
-                    <Link :href="route('realtor.listing.edit', { listing: listing.id })"
-                        class="btn-sky flex items-center justify-center gap-1 px-4 py-1 text-sm rounded w-full md:w-auto">
-                    <PencilSquareIcon class="w-4 h-4" />
-                    Edit
-                    </Link>
-                </div> -->
-
-                <!-- <div v-if="listing.can.delete">
-                    <button @click="confirmDelete('listing.destroy', { listing: listing.id })"
-                        class="btn-indianred flex items-center justify-center gap-1 px-4 py-1 text-sm rounded w-full md:w-auto">
-                        <TrashIcon class="w-4 h-4" />
-                        Delete
-                    </button>
-                </div> -->
+                <Tooltip text="Clique para ver preço, espaço, endereço e detalhes do imóvel" position="top" />
             </div>
         </div>
     </Box>
 </template>
-
 
 <script setup>
 import Tooltip from '@/Components/UI/Tooltip.vue'
@@ -48,7 +33,6 @@ import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
 import { useMonthlyPayment } from '@/Composables/useMonthlyPayment'
 import { useConfirmDelete } from '@/Composables/useConfirmDelete'
-// import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 const { confirmDelete } = useConfirmDelete()
 const props = defineProps({ listing: Object })
